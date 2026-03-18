@@ -14,7 +14,7 @@ def index():
 @app.route('/search', methods=['POST'])
 def search():
     location_name = request.form.get('location', '').strip()
-    api_key = "67991bff3860450e88b140e28f0c7cb3"
+    api_key = ""
     
     if not location_name:
         return redirect(url_for('index'))
