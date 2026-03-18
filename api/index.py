@@ -4,7 +4,7 @@ import requests
 from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 def init_db():
-    with sqlite3.connect('favorites.db') as conn:
+    with sqlite3.connect('/tmp/favorites.db') as conn:
         conn.execute('CREATE TABLE IF NOT EXISTS places (id INTEGER PRIMARY KEY, name TEXT, address TEXT)')
 init_db() 
 @app.route('/')
@@ -47,20 +47,20 @@ def search():
 def add_favorite():
     name = request.form.get('name')
     address = request.form.get('address')
-    with sqlite3.connect('favorites.db') as conn:
+    with sqlite3.connect('/tmp/favorites.db') as conn:
         conn.execute('INSERT INTO places (name, address) VALUES (?, ?)', (name, address))
     return redirect(url_for('view_favorites'))
 
 @app.route('/favorites')
 def view_favorites():
-    with sqlite3.connect('favorites.db') as conn:
+    with sqlite3.connect('/tmp/favorites.db') as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM places')
         favs = cursor.fetchall()
     return render_template('favorites.html', favs=favs)
 @app.route('/delete/<int:item_id>', methods=['POST'])
 def delete_favorite(item_id):
-    with sqlite3.connect('favorites.db') as conn:
+    with sqlite3.connect('/tmp/favorites.db') as conn:
         conn.execute('DELETE FROM places WHERE id=?', (item_id,))
     return redirect(url_for('view_favorites'))
 if __name__ == '__main__':
