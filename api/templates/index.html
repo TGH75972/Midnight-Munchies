@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midnight Munchies | Home Page :P</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="bg-layer">
+<div class="food-float" style="left: 10%; animation-delay: 0s;">🍔</div>
+<div class="food-float" style="left: 30%; animation-delay: 4s;">🍕</div>
+<div class="food-float" style="left: 50%; animation-delay: 2s;">🌮</div>
+<div class="food-float" style="left: 70%; animation-delay: 7s;">🍟</div>
+<div class="food-float" style="left: 90%; animation-delay: 1s;">🍩</div>
+<div class="food-float" style="left: 20%; animation-delay: 10s;">🍦</div>
+<div class="food-float" style="left: 80%; animation-delay: 5s;">🍣</div>
+</div>
+<div class="foodie-section">
+<h1 class="main-title"><b>Midnight Munchies</b></h1>
+<p class="subtitle">Finding the best local spots for your late-night cravings.</p>
+</div>
+<div class="search-container">
+<form action="/search" method="POST">
+<input type="text" name="location" class="input-field" placeholder="Enter City (Can be any!)" required>
+<button type="submit" class="btn-primary">SCAVENGE PLACES</button>
+</form>
+<div style="text-align: center; margin-top: 20px;">
+<a href="/favorites" class="nav-link"> View My Saved Munchies</a>
+    </div>
+</div>
+</body>
+</html>

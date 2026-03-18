@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munchies in {{ location }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="results-header">
+<h2>Showing results for "{{ location }}"</h2>
+<a href="/" class="btn-primary" style="width: auto; padding: 8px 15px;">New Search</a>
+ </div>
+{% if not results %}
+<div class="search-container">
+<p>No food spots found.Better Eat Next Time!</p>
+  </div>
+{% endif %}
+{% for place in results %}
+<div class="result-card">
+<div class="place-info">
+<h3>{{ place.name }}</h3>
+<p>{{ place.formatted_address }}</p>
+ </div>
+
+<form action="/add_favorite" method="POST">
+<input type="hidden" name="name" value="{{ place.name }}">
+<input type="hidden" name="address" value="{{ place.formatted_address }}">
+<button type="submit" class="btn-save">Save?</button>
+ </form>
+</div>
+{% endfor %}
+</body>
+</html>

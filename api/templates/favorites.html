@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Favorites</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>  
+<body>
+<div class="results-header">
+<h2>My Saved Munchies</h2>
+<a href="/" class="nav-link"><b>Back to Search</b></a>
+</div>
+<table class="fav-table">
+ <thead>
+<tr>
+<th>Restaurant Name</th>
+<th>Location Address</th>
+<th>Action</th>
+</tr>
+ </thead>
+
+<tbody>
+{% for fav in favs %}
+<tr>
+<td><strong>{{ fav[1] }}</strong></td>
+<td>{{ fav[2] }}</td>
+<td>
+<form action="/delete/{{ fav[0] }}" method="POST">
+<button type="submit" class="btn-delete">Remove</button>
+ </form>
+</td>
+</tr>
+{% endfor %}
+   </tbody>
+ </table>
+
+{% if not favs %}
+<div style="margin-top: 40px; text-align: center;">
+<p style="color: #94a3b8;">You haven't saved any spots yet m8!</p>
+</div>
+{% endif %}
+</body>
+</html>
