@@ -27,8 +27,8 @@ def search():
     
     lon = geo_data['features'][0]['geometry']['coordinates'][0]
     lat = geo_data['features'][0]['geometry']['coordinates'][1]
-    
-    places_url = f"https://api.geoapify.com/v2/places?categories=catering&filter=circle:{lon},{lat},5000&limit=10&apiKey={api_key}"
+
+    places_url = f"https://api.geoapify.com/v2/places?categories=catering&filter=circle:{lon},{lat},10000&bias=proximity:{lon},{lat}&limit=20&apiKey={api_key}"
     places_response = requests.get(places_url)
     places_response.raise_for_status()
     places_data = places_response.json()
